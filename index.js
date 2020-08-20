@@ -23,15 +23,16 @@ function idleTimer(options) {
   activate();
 
   function addOrRemoveEvents(addOrRemove) {
-    window[addOrRemove]('load', activate);
-    document[addOrRemove]('mousemove', activate);
-    document[addOrRemove]('scroll', activate);
-    document[addOrRemove]('keypress', activate);
+    window[addOrRemove]('load', activate('load'));
+    document[addOrRemove]('mousemove', activate('mousemove'));
+    document[addOrRemove]('scroll', activate('scroll'));
+    document[addOrRemove]('keypress', activate('keypress'));
   }
 
-  function activate() {
+  function activate(event) {
     if (!isActive) {
       isActive = true;
+      console.log('something happened ' + event);
       activeCallback();
     }
     clearTimeout(timer);
